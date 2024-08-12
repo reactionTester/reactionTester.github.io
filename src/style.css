@@ -5,7 +5,6 @@ body {
     background-color: #e0e0e0;
 }
 
-
 h1 {
     font-weight: 500;
     font-size: 32px;
@@ -21,7 +20,7 @@ h2 {
 #play-beep {
     text-align: center;
     width: 100%;
-    height: 48vh;
+    height: 45vh;
     font-size: 18px;
     padding: 10px 20px;
     color: #fff;
@@ -37,7 +36,7 @@ h2 {
     height: 47vh;
     max-width: 1000px;
     display: flex;
-    padding: 20px;
+    padding: 1rem;
     margin: 0 auto;
 }
 
@@ -67,4 +66,29 @@ h2 {
 
 .input-number {
     width: 3rem;
+}
+
+header {
+    position: relative;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+    display: inline-flex;
+}
+
+nav a {
+    margin-left: 2rem;
+    color: #636363;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #353535;
 }

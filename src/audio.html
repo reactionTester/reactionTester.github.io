@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="This is a free and customizable audio reaction time test. How fast can you react?">
+    <title>Audio Reaction Time Test</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="audio.html">Audio Test</a></li>
+                <li><a href="touch.html">Touch Test</a></li>
+                <li><a href="visual.html">Visual Test</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="play-beep" class="container">
+        <div>
+            <h1 id="title">Audio Reaction Time Test - Measure Your Reaction Speed</h1>
+            <h2 id="message1">When the beep sound click as fast as you can.</h2>
+            <h2 id="message2">Click to begin.</h2>
+        </div>
+    </div>
+    <div class="cards-container">
+        <div class="card">
+            <h2>Last tries</h2>
+            <ul id="tries-list">
+            </ul>
+        </div>
+        <div class="card">
+            <h2>About the test</h2>
+            <p>
+                This is a simple tool to measure your audio reaction time.
+            </p>
+            <p>
+                The average reaction time is about 221 ms for men and 235 ms for women, according to this <a
+                    href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4456887/">study</a>.
+            </p>
+            <p>
+                In addition to measuring your reaction time, this test is affected by the latency of your audio system
+                and computer.
+            </p>
+            <p>
+                Using a wireless headset or Bluetooth headphones may significantly increase the delay.
+            </p>
+            <p>
+                Also, a higher and louder sound may decrease your reaction time.
+            </p>
+        </div>
+        <div class="card">
+            <h2>Settings</h2>
+            <p>Audio settings:</p>
+            <ul>
+                <li>
+                    <label for="wave-select">Wave type:</label>
+                    <select id="wave-select">
+                        <option value="square">Square</option>
+                        <option value="sine">Sine</option>
+                        <option value="sawtooth">Sawtooth</option>
+                        <option value="triangle">Triangle</option>
+                    </select>
+                </li>
+                <li>
+                    <label for="pitch-input">Pitch in hz:</label>
+                    <input class="input-number" type="number" id="pitch-input" value="260" min="20" max="20000" step="1"
+                        size="5">
+                </li>
+                <li>
+                    <label for="volume-input">Volume:</label>
+                    <input class="input-number" type="number" id="volume-input" value="1" min="0" max="1" step="0.01"
+                        size="5">
+                </li>
+            </ul>
+            <p>Test settings:</p>
+            <ul>
+                <li>
+                    <label for="minimum-delay-input">Minimum delay in seconds:</label>
+                    <input class="input-number" type="number" id="minimum-delay-input" value="3" min="0" max="60"
+                        step="1" size="3">
+                </li>
+                <li>
+                    <label for="maximum-delay-input">Maximum delay in seconds:</label>
+                    <input class="input-number" type="number" id="maximum-delay-input" value="12" min="0" max="60"
+                        step="1" size="1">
+                </li>
+                <li>
+                    <label for="number-of-tries-input">Number of tries:</label>
+                    <input class="input-number" type="number" id="number-of-tries-input" value="5" min="1" max="100"
+                        step="1" size="1">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script type="module" src="../dist/script.js" defer></script>
+</body>
+
+</html>

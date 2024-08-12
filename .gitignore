@@ -1,0 +1,30 @@
+# TypeScript
+*.tsbuildinfo
+
+# TypeScript Definition Files
+*.d.ts
+
+# TypeScript Source Maps
+*.js.map
+*.js.map.gz
+
+# TypeScript Declaration Maps
+*.d.ts.map
+*.d.ts.map.gz
+
+# Node modules
+node_modules/
+
+# Output directories
+/dist/
+/out/
+
+# Log files
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
