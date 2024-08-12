@@ -13,9 +13,6 @@ export default abstract class Test {
     protected totalReactionTimeInMs: number;
     protected numberOfReactions: number;
     protected settings: any;
-    protected DOMMinimumDelayInput!: HTMLInputElement;
-    protected DOMMaximumDelayInput!: HTMLInputElement;
-    protected DOMNumberOfTriesInput!: HTMLInputElement;
     protected settingsKey: string;
     protected buttonTitleIdle: string = '';
     protected Message1TitleIdle: string = '';
@@ -88,24 +85,24 @@ export default abstract class Test {
      * @returns {void}
      */
     initializeDOMElements() {
-        this.DOMMinimumDelayInput = document.getElementById("minimum-delay-input") as HTMLInputElement;
-        this.DOMMaximumDelayInput = document.getElementById("maximum-delay-input") as HTMLInputElement;
-        this.DOMNumberOfTriesInput = document.getElementById("number-of-tries-input") as HTMLInputElement;
+        const DOMMinimumDelayInput = document.getElementById("minimum-delay-input") as HTMLInputElement;
+        const DOMMaximumDelayInput = document.getElementById("maximum-delay-input") as HTMLInputElement;
+        const DOMNumberOfTriesInput = document.getElementById("number-of-tries-input") as HTMLInputElement;
 
-        this.DOMMinimumDelayInput.value = this.settings.test.timeBetweenTriesInSecondsMin.toString();
-        this.DOMMaximumDelayInput.value = this.settings.test.timeBetweenTriesInSecondsMax.toString();
-        this.DOMNumberOfTriesInput.value = this.settings.test.numberOfTries.toString();
+        DOMMinimumDelayInput.value = this.settings.test.timeBetweenTriesInSecondsMin.toString();
+        DOMMaximumDelayInput.value = this.settings.test.timeBetweenTriesInSecondsMax.toString();
+        DOMNumberOfTriesInput.value = this.settings.test.numberOfTries.toString();
 
-        this.DOMMinimumDelayInput!.addEventListener('change', () => {
-            this.settings.test.timeBetweenTriesInSecondsMin = parseInt(this.DOMMinimumDelayInput!.value);
+        DOMMinimumDelayInput!.addEventListener('change', () => {
+            this.settings.test.timeBetweenTriesInSecondsMin = parseInt(DOMMinimumDelayInput!.value);
             this.updateSettingsInLocalStorage();
         });
-        this.DOMMaximumDelayInput!.addEventListener('change', () => {
-            this.settings.test.timeBetweenTriesInSecondsMax = parseInt(this.DOMMaximumDelayInput!.value);
+        DOMMaximumDelayInput!.addEventListener('change', () => {
+            this.settings.test.timeBetweenTriesInSecondsMax = parseInt(DOMMaximumDelayInput!.value);
             this.updateSettingsInLocalStorage();
         });
-        this.DOMNumberOfTriesInput!.addEventListener('change', () => {
-            this.settings.test.numberOfTries = parseInt(this.DOMNumberOfTriesInput!.value);
+        DOMNumberOfTriesInput!.addEventListener('change', () => {
+            this.settings.test.numberOfTries = parseInt(DOMNumberOfTriesInput!.value);
             this.updateSettingsInLocalStorage();
         });
     }

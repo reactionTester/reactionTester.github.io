@@ -8,9 +8,6 @@ export default class TestAudio extends Test {
     protected audioContext: AudioContext;
     protected gainNode!: GainNode;
     protected oscillator!: OscillatorNode;
-    protected DOMWaveSelect!: HTMLSelectElement;
-    protected DOMPitchInput!: HTMLInputElement;
-    protected DOMVolumeInput!: HTMLInputElement;
 
     constructor() {
         super();
@@ -67,27 +64,27 @@ export default class TestAudio extends Test {
 
     initializeDOMElements() {
         super.initializeDOMElements();
-        this.DOMWaveSelect = document.getElementById("wave-select") as HTMLSelectElement;
-        this.DOMPitchInput = document.getElementById("pitch-input") as HTMLInputElement;
-        this.DOMVolumeInput = document.getElementById("volume-input") as HTMLInputElement;
+        const DOMWaveSelect = document.getElementById("wave-select") as HTMLSelectElement;
+        const DOMPitchInput = document.getElementById("pitch-input") as HTMLInputElement;
+        const DOMVolumeInput = document.getElementById("volume-input") as HTMLInputElement;
 
-        this.DOMWaveSelect.value = this.settings.audio.type;
-        this.DOMPitchInput.value = this.settings.audio.frequency;
-        this.DOMVolumeInput.value = this.settings.audio.volume;
+        DOMWaveSelect.value = this.settings.audio.type;
+        DOMPitchInput.value = this.settings.audio.frequency;
+        DOMVolumeInput.value = this.settings.audio.volume;
 
-        this.DOMWaveSelect.addEventListener('change', () => {
-            this.settings.audio.type = this.DOMWaveSelect.value;
+        DOMWaveSelect.addEventListener('change', () => {
+            this.settings.audio.type = DOMWaveSelect.value;
             this.updateSettingsInLocalStorageAndUpdateAudio();
 
         });
 
-        this.DOMPitchInput.addEventListener('change', () => {
-            this.settings.audio.frequency = parseInt(this.DOMPitchInput.value);
+        DOMPitchInput.addEventListener('change', () => {
+            this.settings.audio.frequency = parseInt(DOMPitchInput.value);
             this.updateSettingsInLocalStorageAndUpdateAudio();
         });
 
-        this.DOMVolumeInput.addEventListener('change', () => {
-            this.settings.audio.volume = parseFloat(this.DOMVolumeInput.value);
+        DOMVolumeInput.addEventListener('change', () => {
+            this.settings.audio.volume = parseFloat(DOMVolumeInput.value);
             this.updateSettingsInLocalStorageAndUpdateAudio();
         });
     }
