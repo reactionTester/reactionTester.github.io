@@ -1,3 +1,4 @@
+import { State } from "../State.enum.js"
 
 /**
  * abstract @class Test taht represents a test.
@@ -5,17 +6,20 @@
  */
 export default abstract class Test {
 
-    timeoutId: number;
-    isTestRunning: boolean;
-    testStartTimeStamp: number;
-    lastReactionTimeInMs: number;
-    totalReactionTimeInMs: number;
-    numberOfReactions: number;
-    settings: any;
-    DOMMinimumDelayInput!: HTMLInputElement;
-    DOMMaximumDelayInput!: HTMLInputElement;
-    DOMNumberOfTriesInput!: HTMLInputElement;
-    settingsKey: string;
+    protected timeoutId: number;
+    protected isTestRunning: boolean;
+    protected testStartTimeStamp: number;
+    protected lastReactionTimeInMs: number;
+    protected totalReactionTimeInMs: number;
+    protected numberOfReactions: number;
+    protected settings: any;
+    protected DOMMinimumDelayInput!: HTMLInputElement;
+    protected DOMMaximumDelayInput!: HTMLInputElement;
+    protected DOMNumberOfTriesInput!: HTMLInputElement;
+    protected settingsKey: string;
+    protected buttonTitleIdle: string = '';
+    protected Message1TitleIdle: string = '';
+    protected buttonTitleWaitingBeep: string = '';
 
     constructor() {
         this.settingsKey = 'CompleteTest_Settings';
@@ -38,12 +42,49 @@ export default abstract class Test {
         });
     }
 
+    getNumberOfReactions() {
+        return this.numberOfReactions;
+    }
+
+    getLastReactionTimeInMs() {
+        return this.lastReactionTimeInMs;
+    }
+
+    getTotalReactionTimeInMs() {
+        return this.totalReactionTimeInMs;
+    }
+
+    getSettings() {
+        return this.settings;
+    }
+
+    getIsTestRunning() {
+        return this.isTestRunning;
+    }
+
+    getButtonTitle(state: State) {
+        switch (state) {
+            case State.IDLE:
+                return this.buttonTitleIdle;
+            case State.WAITING_BEEP:
+                return this.buttonTitleWaitingBeep;
+            default:
+                return '';
+        }
+    }
+
+    getMessage1Title(state: State) {
+        switch (state) {
+            case State.IDLE:
+                return this.Message1TitleIdle;
+            default:
+                return '';
+        }
+    }
 
     /**
      * Initializes the DOM elements.
-     * The DOM elements are the inputs that the user can interact with in the settings card.
-     * value of the inputs are set to the values of the settings retrieved from local storage.
-     * Event listeners are added to the inputs to update the settings in local storage.
+     * This method is called in the constructor when the DOM is loaded.
      * @returns {void}
      */
     initializeDOMElements() {
@@ -95,7 +136,7 @@ export default abstract class Test {
      */
     stop() {
         let timeStampClick = performance.now();
-        this.lastReactionTimeInMs = timeStampClick - this.testStartTimeStamp - 10;
+        this.lastReactionTimeInMs = timeStampClick - this.testStartTimeStamp;
         this.totalReactionTimeInMs += this.lastReactionTimeInMs;
         this.stopAction();
         this.isTestRunning = false;

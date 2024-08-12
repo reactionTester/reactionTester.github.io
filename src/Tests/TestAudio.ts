@@ -5,15 +5,18 @@ import Test from './Test.js';
  */
 export default class TestAudio extends Test {
 
-    audioContext: AudioContext;
-    gainNode!: GainNode;
-    oscillator!: OscillatorNode;
-    DOMWaveSelect!: HTMLSelectElement;
-    DOMPitchInput!: HTMLInputElement;
-    DOMVolumeInput!: HTMLInputElement;
+    protected audioContext: AudioContext;
+    protected gainNode!: GainNode;
+    protected oscillator!: OscillatorNode;
+    protected DOMWaveSelect!: HTMLSelectElement;
+    protected DOMPitchInput!: HTMLInputElement;
+    protected DOMVolumeInput!: HTMLInputElement;
 
     constructor() {
         super();
+        this.buttonTitleIdle = 'Audio Reaction Time Test.';
+        this.Message1TitleIdle = 'When the beep sounds click, as fast as you can.';
+        this.buttonTitleWaitingBeep = 'Click when you hear the beep.';
         this.settingsKey = 'AudioTest_Settings';
         this.settings.audio = {
             volume: 0.5,
@@ -24,7 +27,6 @@ export default class TestAudio extends Test {
 
         document.addEventListener('mousedown', () => { this.oscillator.start() }, { once: true });
     }
-
 
     startAction(): void {
         this.gainNode.connect(this.audioContext.destination);

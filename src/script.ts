@@ -1,22 +1,36 @@
 import TestAudio from "./Tests/TestAudio.js"
+import TestTouch from "./Tests/TestTouch.js"
+import TestVisual from "./Tests/TestVisual.js"
 import Test from "./Tests/Test.js"
-
-enum State {
-    IDLE = 'idle',
-    WAITING_BEEP = 'waiting beep',
-    RESULT = 'result',
-    FALSE_START = 'false start',
-    FINAL_RESULT = 'final result'
-};
+import { State } from "./State.enum.js"
 
 const blueColorHex = '#007bff';
 const orangeColorHex = '#f59e42';
 const redColorHex = '#ff4c4c';
+const greenColorHex = '#28a745';
 const lastTriesKey = 'CompleteTest_LastTries';
 
-let test: Test = new TestAudio();
+let test: Test = getTest();
 let state = State.IDLE;
 let lastTries: number[] = [];
+
+/*
+* @function getTest
+* @description Get the test in fonction of the page the user is on.
+* uses a value defined in a script tag in the html file.
+*/
+function getTest(): Test {
+    switch (page) {
+        case 'audio':
+            return new TestAudio();
+        case 'visual':
+            return new TestVisual(blueColorHex, greenColorHex);
+        case 'touch':
+            return new TestTouch();
+        default:
+            return new TestTouch();
+    }
+}
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -44,9 +58,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 transitionToWaitingBeep();
                 break;
             case State.WAITING_BEEP:
-                if (!test.isTestRunning)
+                if (!test.getIsTestRunning())
                     transitionToFalseStart();
-                else if (test.numberOfReactions >= test.settings.test.numberOfTries - 1)
+                else if (test.getNumberOfReactions() >= test.getSettings().test.numberOfTries - 1)
                     transitionToFinalResult();
                 else
                     transitionToResult();
@@ -69,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
         state = State.WAITING_BEEP;
         test.startRandom();
         DOMplayButton.style.backgroundColor = orangeColorHex;
-        DOMTitle.textContent = 'Click when you hear the beep.';
+        DOMTitle.textContent = test.getButtonTitle(state);
         DOMMessage1.textContent = '';
         DOMMessage2.textContent = '';
     }
@@ -78,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
         state = State.RESULT;
         test.stop();
         DOMplayButton!.style.backgroundColor = blueColorHex;
-        DOMTitle!.textContent = Math.floor(test.lastReactionTimeInMs) + ' ms';
+        DOMTitle!.textContent = Math.floor(test.getLastReactionTimeInMs()) + ' ms';
         DOMMessage1!.textContent = 'Click to try again.';
         DOMMessage2!.textContent = '';
     }
@@ -96,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
         state = State.FINAL_RESULT;
         test.stop();
         DOMplayButton.style.backgroundColor = blueColorHex;
-        let averageReactionTimeInMs = Math.floor(test.totalReactionTimeInMs / test.settings.test.numberOfTries);
+        let averageReactionTimeInMs = Math.floor(test.getTotalReactionTimeInMs() / test.getSettings().test.numberOfTries);
         DOMTitle!.textContent = 'Average result: ' + averageReactionTimeInMs + ' ms';
         DOMMessage1!.textContent = 'Click to try again the test.';
         DOMMessage2!.textContent = '';
@@ -109,8 +123,8 @@ document.addEventListener('DOMContentLoaded', function () {
         state = State.IDLE;
         test.reset();
         DOMplayButton!.style.backgroundColor = blueColorHex;
-        DOMTitle!.textContent = 'Audio Reaction Time Test';
-        DOMMessage1!.textContent = 'When the beep sound click as fast as you can.';
+        DOMTitle!.textContent = test.getButtonTitle(state);
+        DOMMessage1!.textContent = test.getMessage1Title(state);
         DOMMessage2!.textContent = 'Click to begin.';
     }
 
