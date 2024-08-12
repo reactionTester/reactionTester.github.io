@@ -10,7 +10,7 @@ export default class TestTouch extends Test {
 
     constructor() {
         super();
-        this.buttonTitleIdle = 'TouchReaction Time Test.';
+        this.buttonTitleIdle = 'Touch Reaction Time Test.';
         this.Message1TitleIdle = 'Connect a gamepad to your computer.';
         this.buttonTitleWaitingBeep = 'Click when you feel the vibration.';
         this.settingsKey = 'TouchTest_Settings';
@@ -19,8 +19,7 @@ export default class TestTouch extends Test {
         this.settings.gamepad = {
             gamepadId: 0,
             durationInSeconds: 1,
-            weakMagnitude: 0.5,
-            strongMagnitude: 0.5,
+            vibrationStrength: 0.5,
         };
     }
 
@@ -38,25 +37,24 @@ export default class TestTouch extends Test {
         this.selectedGamepad.vibrationActuator.playEffect("dual-rumble", {
             startDelay: 0,
             duration: this.settings.gamepad.durationInSeconds * 1000,
-            weakMagnitude: this.settings.gamepad.weakMagnitude,
-            strongMagnitude: this.settings.gamepad.strongMagnitude,
+            weakMagnitude: this.settings.gamepad.vibrationStrength,
+            strongMagnitude: this.settings.gamepad.vibrationStrength,
             leftTrigger: 1,
             rightTrigger: 1
         });
     }
 
     stopAction(): void {
+        this.selectedGamepad?.vibrationActuator.reset();
     }
 
     initializeDOMElements(): void {
         super.initializeDOMElements();
         const DOMGamepadSelect = document.getElementById("gamepad-select") as HTMLSelectElement;
-        const DOMWeakMagnitudeInput = document.getElementById("weak-magnitude-input") as HTMLInputElement;
-        const DOMStrongMagnitudeInput = document.getElementById("strong-magnitude-input") as HTMLInputElement;
+        const DOMVibrationStrengthInput = document.getElementById("vibration-strength-input") as HTMLInputElement;
         const DOMVibrationDurationInput = document.getElementById("vibration-duration-input") as HTMLInputElement;
 
-        DOMWeakMagnitudeInput.value = this.settings.gamepad.weakMagnitude;
-        DOMStrongMagnitudeInput.value = this.settings.gamepad.strongMagnitude;
+        DOMVibrationStrengthInput.value = this.settings.gamepad.vibrationStrength;
         DOMVibrationDurationInput.value = this.settings.gamepad.durationInSeconds;
 
         DOMGamepadSelect.addEventListener('change', () => {
@@ -65,13 +63,8 @@ export default class TestTouch extends Test {
             this.updateSettingsInLocalStorage();
         });
 
-        DOMWeakMagnitudeInput.addEventListener('change', () => {
-            this.settings.gamepad.weakMagnitude = parseFloat(DOMWeakMagnitudeInput.value);
-            this.updateSettingsInLocalStorage();
-        });
-
-        DOMStrongMagnitudeInput.addEventListener('change', () => {
-            this.settings.gamepad.strongMagnitude = parseFloat(DOMStrongMagnitudeInput.value);
+        DOMVibrationStrengthInput.addEventListener('change', () => {
+            this.settings.gamepad.vibrationStrength = parseFloat(DOMVibrationStrengthInput.value);
             this.updateSettingsInLocalStorage();
         });
 
@@ -109,5 +102,4 @@ export default class TestTouch extends Test {
             }
         }
     }
-
 }
