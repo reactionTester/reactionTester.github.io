@@ -1,6 +1,7 @@
 import TestAudio from "./Tests/TestAudio.js"
 import TestTouch from "./Tests/TestTouch.js"
 import TestVisual from "./Tests/TestVisual.js"
+import TestComplete from "./Tests/TestComplete.js"
 import Test from "./Tests/Test.js"
 import { State } from "./State.enum.js"
 
@@ -27,6 +28,8 @@ function getTest(): Test {
             return new TestVisual(blueColorHex, greenColorHex);
         case 'touch':
             return new TestTouch();
+        case 'complete':
+            return new TestComplete();
         default:
             return new TestTouch();
     }

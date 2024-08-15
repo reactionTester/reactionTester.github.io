@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="This is a free and customizable touch reaction time test. How fast can you react?">
-    <title>Touch Reaction Time Test</title>
+        content="This is a free and customizable visual, audio and touch reaction time test. How fast can you react?">
+    <title>Complete Reaction Time Test</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
@@ -24,8 +24,8 @@
     </header>
     <div id="play-beep" class="container">
         <div>
-            <h1 id="title">Touch Reaction Time Test - Measure Your Reaction Speed</h1>
-            <h2 id="message1">Connect a gamepad to your computer. Click when you feel the vibration.</h2>
+            <h1 id="title">Complete Reaction Time Test - Measure Your Reaction Speed</h1>
+            <h2 id="message1">When the button turns green, click as fast as you can.</h2>
             <h2 id="message2">Click to begin.</h2>
         </div>
     </div>
@@ -38,22 +38,20 @@
         <div class="card">
             <h2>About the test</h2>
             <p>
-                This is a simple tool to measure your touch reaction time.
+                This is a simple tool to measure your visual reaction time.
             </p>
             <p>
-                The average touch reaction time is about 139 ms, according to this <a
-                    href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6307023/">study</a>.
+                The average visual reaction time is about 240 ms for men and 255 ms for women, according to this <a
+                    href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4456887/">study</a>.
             </p>
             <p>
-                In addition to measuring your reaction time, this test is affected by the latency of your gamepad
+                In addition to measuring your reaction time, this test is affected by the latency of your monitor
                 and computer.
-            </p>
-            <p>
-                Using a wireless or old gamepad may increase the delay.
             </p>
         </div>
         <div class="card">
             <h2>Settings</h2>
+
             <p>Gamepad settings:</p>
             <ul>
                 <li>
@@ -73,15 +71,38 @@
                 </li>
             </ul>
 
+            <p>Audio settings:</p>
+            <ul>
+                <li>
+                    <label for="wave-select">Wave type:</label>
+                    <select id="wave-select">
+                        <option value="square">Square</option>
+                        <option value="sine">Sine</option>
+                        <option value="sawtooth">Sawtooth</option>
+                        <option value="triangle">Triangle</option>
+                    </select>
+                </li>
+                <li>
+                    <label for="pitch-input">Pitch in hz:</label>
+                    <input class="input-number" type="number" id="pitch-input" value="260" min="20" max="20000" step="1"
+                        size="5">
+                </li>
+                <li>
+                    <label for="volume-input">Volume:</label>
+                    <input class="input-number" type="number" id="volume-input" value="1" min="0" max="1" step="0.01"
+                        size="5">
+                </li>
+            </ul>
+
             <p>Test settings:</p>
             <ul>
                 <li>
-                    <label for="minimum-delay-input">Minimum delay:</label>
+                    <label for="minimum-delay-input">Minimum delay in seconds:</label>
                     <input class="input-number" type="number" id="minimum-delay-input" value="3" min="0" max="60"
                         step="1" size="3">
                 </li>
                 <li>
-                    <label for="maximum-delay-input">Maximum delay:</label>
+                    <label for="maximum-delay-input">Maximum delay in seconds:</label>
                     <input class="input-number" type="number" id="maximum-delay-input" value="12" min="0" max="60"
                         step="1" size="1">
                 </li>
@@ -94,9 +115,9 @@
         </div>
     </div>
     <script>
-        const page = "touch";
+        const page = "complete";
     </script>
-    <script type="module" src="../../dist/script.js" defer></script>
+    <script type="module" src="../dist/script.js" defer></script>
 </body>
 
 </html>
