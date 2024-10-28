@@ -27,16 +27,13 @@ function vibrationsAvailableOnBrowser() {
 }
 
 function ifVibrationsNotAvailableShowModal() {
-    if (!vibrationsAvailableOnBrowser()) {
-        console.log("Rumble not available on browser");
-        const modal = document.getElementById("vibration-not-supported-modal");
-        modal!.style.display = "block";
-        const overlay = document.getElementById("overlay");
-        overlay!.style.display = "block";
-    }
-    else {
-        console.log("Rumble available on browser");
-    }
+    if (vibrationsAvailableOnBrowser())
+        return;
+
+    const modal = document.getElementById("vibration-not-supported-modal");
+    modal!.style.display = "block";
+    const overlay = document.getElementById("overlay");
+    overlay!.style.display = "block";
 }
 
 function closeModal() {
