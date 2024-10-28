@@ -92,11 +92,24 @@
                 </li>
             </ul>
         </div>
+        <div id="vibration-not-supported-modal" class="card modal">
+            <div class="card-header">
+                <span id="vibration-not-supported-modal-close" class="close">&times;</span>
+            </div>
+            <div class="card-body">
+                <p>This test is not available on your browser, because it does not support gamepad vibrations.</p>
+                <p>The browsers supported for this test are: Chrome, Edge, Opera and safari (except on iOs).</p>
+                <p>The other tests are available on all browsers.</p>
+            </div>
+        </div>
+        <div id="overlay" />
     </div>
     <script>
         const page = "touch";
     </script>
     <script type="module" src="../../dist/ts/script.js" defer></script>
+    <script type="module" src="../../dist/ts/touchScript.js" defer></script>
+
 </body>
 
 </html>
