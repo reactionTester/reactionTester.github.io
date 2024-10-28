@@ -2,7 +2,6 @@ import Test from './Test.js';
 import TestAudio from './TestAudio.js';
 import TestVisual from './TestVisual.js';
 import TestTouch from './TestTouch.js';
-import TestComplete from './TestComplete.js';
 
 export default class TestFactory {
     private page: string;
@@ -24,8 +23,6 @@ export default class TestFactory {
                 return new TestVisual('#007bff', '#42f554'); // blueColorHex et greenColorHex
             case 'touch':
                 return new TestTouch();
-            case 'complete':
-                return new TestComplete('#007bff', '#42f554');
             default:
                 return new TestTouch();
         }
