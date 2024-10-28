@@ -11,11 +11,11 @@ export default class TestTouch extends Test {
     constructor() {
         super();
         this.buttonTitleIdle = 'Touch Reaction Time Test.';
-        this.Message1TitleIdle = 'Connect a gamepad to your computer.';
+        this.Message1TitleIdle = 'Connect a gamepad to your computer (You may need to press a button if it\'s connected and don\'t show up in the settings).';
         this.buttonTitleWaitingBeep = 'Click when you feel the vibration.';
         this.settingsKey = 'TouchTest_Settings';
-        window.addEventListener("gamepadconnected", (e) => { this.addGamepad(e.gamepad) });
-        window.addEventListener("gamepaddisconnected", (e) => { this.removeGamepad(e.gamepad) });
+        window.addEventListener('gamepadconnected', (e) => { this.addGamepad(e.gamepad) });
+        window.addEventListener('gamepaddisconnected', (e) => { this.removeGamepad(e.gamepad) });
         this.settings.gamepad = {
             gamepadId: 'Select your gamepad',
             durationInSeconds: 1,
@@ -35,7 +35,7 @@ export default class TestTouch extends Test {
         }
 
 
-        this.selectedGamepad.vibrationActuator.playEffect("dual-rumble", {
+        this.selectedGamepad.vibrationActuator.playEffect('dual-rumble', {
             startDelay: 0,
             duration: this.settings.gamepad.durationInSeconds * 1000,
             weakMagnitude: this.settings.gamepad.vibrationStrength,
@@ -51,9 +51,9 @@ export default class TestTouch extends Test {
 
     initializeDOMElements(): void {
         super.initializeDOMElements();
-        const DOMGamepadSelect = document.getElementById("gamepad-select") as HTMLSelectElement;
-        const DOMVibrationStrengthInput = document.getElementById("vibration-strength-input") as HTMLInputElement;
-        const DOMVibrationDurationInput = document.getElementById("vibration-duration-input") as HTMLInputElement;
+        const DOMGamepadSelect = document.getElementById('gamepad-select') as HTMLSelectElement;
+        const DOMVibrationStrengthInput = document.getElementById('vibration-strength-input') as HTMLInputElement;
+        const DOMVibrationDurationInput = document.getElementById('vibration-duration-input') as HTMLInputElement;
 
         DOMVibrationStrengthInput.value = this.settings.gamepad.vibrationStrength;
         DOMVibrationDurationInput.value = this.settings.gamepad.durationInSeconds;
@@ -92,7 +92,7 @@ export default class TestTouch extends Test {
         if (this.selectedGamepad === null)
             this.selectedGamepad = gamepad;
 
-        const DOMGamepadSelect = document.getElementById("gamepad-select") as HTMLSelectElement;
+        const DOMGamepadSelect = document.getElementById('gamepad-select') as HTMLSelectElement;
         const option = document.createElement('option');
         option.value = gamepad.id;
         option.textContent = gamepad.id;
@@ -105,7 +105,7 @@ export default class TestTouch extends Test {
             this.selectedGamepad = this.gamepads.length > 0 ? this.gamepads[0] : null;
         }
 
-        const DOMGamepadSelect = document.getElementById("gamepad-select") as HTMLSelectElement;
+        const DOMGamepadSelect = document.getElementById('gamepad-select') as HTMLSelectElement;
         for (let i = 0; i < DOMGamepadSelect.options.length; i++) {
             const option = DOMGamepadSelect.options[i];
 
