@@ -1,13 +1,9 @@
-# Simple workflow for deploying static content to GitHub Pages
+# Simple workflow for building and deploying static content from src directory to Github pages
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -20,34 +16,35 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: false
-  
+
 jobs:
-  # Build job
   build:
-    # Specify runner +  build & upload the static files as an artifact
     runs-on: ubuntu-latest
-    steps:
-      - name: Build static files
-        id: build
-        run: |
-          # <Not provided for brevity>
-          # At a minimum this step should build the static files of your site
-          # <Not provided for brevity>
 
-      - name: Upload static files as artifact
-        id: deployment
-        uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          path: build_outputs_folder/
+          node-version: '14'
 
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build TypeScript
+        run: |
+          mkdir -p src/dist
+          tsc --outDir src/dist
+
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: src
+
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: src
