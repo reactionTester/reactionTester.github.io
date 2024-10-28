@@ -17,7 +17,7 @@ export default class TestTouch extends Test {
         window.addEventListener("gamepadconnected", (e) => { this.addGamepad(e.gamepad) });
         window.addEventListener("gamepaddisconnected", (e) => { this.removeGamepad(e.gamepad) });
         this.settings.gamepad = {
-            gamepadId: 0,
+            gamepadId: 'Select your gamepad',
             durationInSeconds: 1,
             vibrationStrength: 0.5,
         };
@@ -33,6 +33,7 @@ export default class TestTouch extends Test {
             alert('Gamepad does not support vibration.');
             return;
         }
+
 
         this.selectedGamepad.vibrationActuator.playEffect("dual-rumble", {
             startDelay: 0,
@@ -56,10 +57,11 @@ export default class TestTouch extends Test {
 
         DOMVibrationStrengthInput.value = this.settings.gamepad.vibrationStrength;
         DOMVibrationDurationInput.value = this.settings.gamepad.durationInSeconds;
+        DOMGamepadSelect.value = this.getGamepadIfExist(this.settings.gamepad.gamepadId)?.id || 'Select your gamepad';
 
         DOMGamepadSelect.addEventListener('change', () => {
             this.settings.gamepad.gamepadId = DOMGamepadSelect.value;
-            this.selectedGamepad = this.gamepads?.find(gamepad => gamepad?.id === DOMGamepadSelect.value) || null;
+            this.selectedGamepad = this.getGamepadIfExist(this.settings.gamepad.gamepadId);
             this.updateSettingsInLocalStorage();
         });
 
@@ -72,6 +74,17 @@ export default class TestTouch extends Test {
             this.settings.gamepad.durationInSeconds = parseFloat(DOMVibrationDurationInput.value);
             this.updateSettingsInLocalStorage();
         });
+    }
+
+    /*
+    * @function getGamepadIfExist
+    * @description Check if a gamepad exists in the gamepads array and return it if it does exist or null if it does not
+    * @param {any} gamepadId - The id of the gamepad to check
+    * @returns {Gamepad | null} the gamepad if it exists or null if it does not
+    */
+    private getGamepadIfExist(gamepadId: any): Gamepad | null {
+        console.log(this.gamepads);
+        return this.gamepads?.find(gamepad => gamepad?.id === gamepadId) || null
     }
 
     private addGamepad(gamepad: Gamepad) {

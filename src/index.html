@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="This is a free and customizable visual, audio and touch reaction time test. How fast can you react?">
-    <title>Audio Reaction Time Test</title>
+    <title>Complete Reaction Time Test</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -15,6 +15,7 @@
     <header>
         <nav>
             <ul>
+                <li><a href="pages/complete.html">Complete Test</a></li>
                 <li><a href="pages/audio.html">Audio Test</a></li>
                 <li><a href="pages/touch.html">Touch Test</a></li>
                 <li><a href="pages/visual.html">Visual Test</a></li>
@@ -24,7 +25,7 @@
     <div id="play-beep" class="container">
         <div>
             <h1 id="title">Visual Reaction Time Test - Measure Your Reaction Speed</h1>
-            <h2 id="message1">When the beep sound click as fast as you can.</h2>
+            <h2 id="message1">When the button turns green, click as fast as you can.</h2>
             <h2 id="message2">Click to begin.</h2>
         </div>
     </div>
@@ -36,23 +37,16 @@
         </div>
         <div class="card">
             <h2>About the test</h2>
-
             <p>
                 This is a simple tool to measure your visual reaction time.
             </p>
             <p>
-                The average reaction time is about 221 ms for men and 235 ms for women, according to this <a
+                The average visual reaction time is about 240 ms for men and 255 ms for women, according to this <a
                     href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4456887/">study</a>.
             </p>
             <p>
-                In addition to measuring your reaction time, this test is affected by the latency of your audio system
+                In addition to measuring your reaction time, this test is affected by the latency of your monitor
                 and computer.
-            </p>
-            <p>
-                Using a wireless headset or Bluetooth headphones may significantly increase the delay.
-            </p>
-            <p>
-                Also, a higher and louder sound may decrease your reaction time.
             </p>
         </div>
         <div class="card">
@@ -78,7 +72,7 @@
         </div>
     </div>
     <script>
-        const page = "index";
+        const page = "visual";
     </script>
     <script type="module" src="../dist/script.js" defer></script>
 </body>

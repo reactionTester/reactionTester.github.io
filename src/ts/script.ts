@@ -1,6 +1,4 @@
-import TestAudio from "./Tests/TestAudio.js"
-import TestTouch from "./Tests/TestTouch.js"
-import TestVisual from "./Tests/TestVisual.js"
+import TestFactory from "./Tests/TestFactory.js"
 import Test from "./Tests/Test.js"
 import { State } from "./State.enum.js"
 
@@ -14,22 +12,10 @@ let test: Test = getTest();
 let state = State.IDLE;
 let lastTries: number[] = [];
 
-/*
-* @function getTest
-* @description Get the test in fonction of the page the user is on.
-* uses a value defined in a script tag in the html file.
-*/
 function getTest(): Test {
-    switch (page) {
-        case 'audio':
-            return new TestAudio();
-        case 'visual':
-            return new TestVisual(blueColorHex, greenColorHex);
-        case 'touch':
-            return new TestTouch();
-        default:
-            return new TestTouch();
-    }
+    // @ts-ignore
+    const testFactory = new TestFactory(page);
+    return testFactory.createTest();
 }
 
 document.addEventListener('DOMContentLoaded', function () {
